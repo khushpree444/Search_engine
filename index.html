@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bar</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(45deg, #ff6b6b, #f06595, #ff9f40, #13f9a5, #ff9f40, #f06595, #fa5f5f, #7dfa72);
+            background-size: 600% 600%;
+            animation: gradientAnimation 15s ease infinite;
+            font-family: Arial, sans-serif;
+        }
+        
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        .search-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            width: 500px;
+        }
+        
+        input[type="text"] {
+            padding: 15px;
+            width: calc(100% - 22px); /* Adjust for padding and borders */
+            font-size: 18px;
+            font-weight: bold;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        input[type="text"]:hover {
+            border-color: #7dfa72;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
+        }
+        
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+            transform: scale(1.05);
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            border-radius: 4px;
+            background: white;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+            box-sizing: border-box;
+            width: calc(100% - 22px); /* Adjust for padding and borders */
+            margin-right: 0; /* Remove margin-right */
+            margin-bottom: 10px; /* Add some space below select */
+        }
+
+        @media (max-width: 600px) {
+            .search-container {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            input[type="text"], select, button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <select id="searchEngine">
+            <option value="https://www.bing.com/search?q=">Bing</option>
+            <option value="https://www.perplexity.ai/search?q=">Perplexity AI</option>
+            <option value="https://www.google.com/search?q=">Google</option>
+            <option value="https://www.yahoo.com/search?p=">Yahoo</option>
+            <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
+            <option value="https://search.brave.com/search?q=">Brave</option>
+            <option value="https://www.youtube.com/results?search_query=">Youtube</option>
+            <option value="https://www.google.com/scholar?q=">Google Scholar</option>
+            <option value="https://en.wikipedia.org/wiki/">Wekipedia</option>
+        </select>
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button onclick="performSearch()">Search</button>
+    </div>
+
+    <script>
+        function performSearch() {
+            var query = document.getElementById('searchInput').value;
+            var engine = document.getElementById('searchEngine').value;
+            if (query) {
+                window.open(engine + encodeURIComponent(query), '_blank');
+            }
+        }
+
+        document.getElementById('searchInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                performSearch();
+            }
+        });
+    </script>
+</body>
+</html>
